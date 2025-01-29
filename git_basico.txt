@@ -36,6 +36,7 @@ git remote add origin https://github.com/mi_cuenta/nomre_del_repo.git
 git branch -M main para cambiar la rama
 git push -u origin main
 
+git
 
 """
 git config #para configurar git, SOLO SE HACE UNA VEZ
