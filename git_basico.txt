@@ -29,3 +29,9 @@ git rm --cached nom_de_fichero
 Para ver el estado del repositorio
 git status
 
+Para pasar a commit (ficheros validados)
+git commit -m "mensaje"
+
+git remote add origin https://github.com/mi_cuenta/nomre_del_repo.git
+git branch -M main para cambiar la rama
+git push -u origin main
