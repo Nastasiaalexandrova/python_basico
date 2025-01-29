@@ -1,0 +1,31 @@
+Configuracion del GIT
+
+Nombre del usuario
+git config --global user.name
+
+Direccion del email
+
+Configurar 
+
+
+
+
+
+
+
+
+
+
+
+Iniciamos el repositorio (solo al empezar el proyecto)
+git init
+
+Para pasra a la fase Stage
+git add .
+
+Para volver a la fase inicial
+git rm --cached nom_de_fichero
+
+Para ver el estado del repositorio
+git status
+
