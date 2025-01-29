@@ -32,6 +32,11 @@ git status
 Para pasar a commit (ficheros validados)
 git commit -m "mensaje"
 
+Cuando hay cambios en un fichero
+git commit -a 
+
+Instrucciones para github
+
 git remote add origin https://github.com/mi_cuenta/nomre_del_repo.git
 git branch -M main para cambiar la rama
 git push -u origin main
