@@ -12,5 +12,5 @@ surname = "Mishakova"
 age = 35
 phrase = "Hola. Me llamo" + " " + name + " " + surname + "." + " Yo tengo " + str(age) + " años"
 print(phrase)
-phrase2 = f"'Hola'{name} {surname} {age}"
+phrase2 = f"Hola. Me llamo {name} {surname}. Yo tengo {age} años"
 print(phrase2)

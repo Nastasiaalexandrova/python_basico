@@ -63,6 +63,6 @@ print(texto_final)
 print(texto1, texto2)
 texto_final2 = f"{texto1} {texto2}"
 print(texto_final2)
-texto_final3 = "{} {}".format(texto1, texto2)
+texto_final3 = "{} {}".format(texto1, texto2)       
 print(texto_final3)
 
