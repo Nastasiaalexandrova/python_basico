@@ -103,3 +103,13 @@ print(frase.replace("a", "i"))
 palabras_en_frase = frase.split(" ")
 print(palabras_en_frase)
 print(len(palabras_en_frase))
+
+print(10 > 5)
+print("abeja" > "flor") #False
+print("abeja" < "flor") #True - a,b,c...f.... Z es la mas grande
+print("abeja" < "abejb") #True
+
+#EJERCICIO
+texto = "bUeNos dIAs" #Buenos dias
+texto = texto.lower().capitalize()
+print(texto)
