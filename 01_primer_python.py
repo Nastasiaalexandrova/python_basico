@@ -64,5 +64,9 @@ print(texto1, texto2)
 texto_final2 = f"{texto1} {texto2}"
 print(texto_final2)
 texto_final3 = "{} {}".format(texto1, texto2)       
+# The {} placeholders are used to indicate where you want to insert the values of texto1 and texto2.
+# .format() is a method that replaces the {} placeholders with the variables provided in the format() method.
+# In this case, texto1 will replace the first {}, and texto2 will replace the second {}.
+# So, if texto1 = "Hello" and texto2 = "World", after running this line, texto_final3 will be "Hello World".
 print(texto_final3)
 
