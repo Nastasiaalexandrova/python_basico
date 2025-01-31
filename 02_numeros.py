@@ -1,6 +1,8 @@
 """
 PROPIEDADES DE LO NUMEROS
 """
+import os
+os.system("cls")
 
 suma = 1 + 3
 resta = 1 - 4
@@ -35,3 +37,12 @@ verdadero = True
 # True = False # Error critico
 print( verdadero )
 print("!True")
+
+edad = input("Escribe")
+print(edad.isdigit()) #- numero entero
+print(edad.isdecimal()) # 
+print(edad.isnumeric())
+
+# METODOS PARA NUMEROS
+# redondear el numero a la izquierda o a la derecha
+redondear_izquierda = round
