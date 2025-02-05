@@ -14,6 +14,7 @@ exponencial = 2 ** 3
 exponencial2 = 4 ** 0.5
 division_entera = 20 // 6
 modulo = 20 % 3
+print(f"MODULOOOOOOOOOOOOOOOOOOOO 20%3 {modulo}")
 modulo2 = 200234 % 2
 
 operacion = (1 + 2) - (3 * 30 / 5) # -15.0
