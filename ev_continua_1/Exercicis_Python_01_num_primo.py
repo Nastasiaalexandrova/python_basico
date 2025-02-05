@@ -42,44 +42,67 @@ os.system("cls")
 
 
 # Количество попыток, которое даем пользователю для ввода правильного числа
-intentos = 3
+# intentos = 3
 
-# Цикл будет выполняться до тех пор, пока у пользователя есть попытки
+# # Цикл будет выполняться до тех пор, пока у пользователя есть попытки
+# while intentos > 0:
+#     try:
+#         # Пытаемся получить целое число от пользователя
+#         numero = int(input("Escribe un número entero: "))  # Вводим число и пытаемся преобразовать в целое
+
+#         # Проверяем, является ли число простым
+#         if numero <= 1:
+#             # Числа 1 и меньше не могут быть простыми
+#             print(f"El número {numero} no es primo")  # Сообщаем, что число не простое
+#         else:
+#             # Флаг, который определяет, является ли число простым
+#             es_primo = True  # Предполагаем, что число простое
+
+#             # Проверка на делимость числа от 2 до самого числа - 1
+#             for i in range(2, numero):  # Перебираем числа от 2 до числа-1
+#                 if numero % i == 0:  # Если число делится на i без остатка
+#                     es_primo = False  # Значит, это не простое число
+#                     break  # Останавливаем цикл, так как нашли делитель
+
+#             # Выводим результат: если флаг es_primo остался True, то число простое
+#             if es_primo:
+#                 print(f"El número {numero} es primo")  # Число простое
+#             else:
+#                 print(f"El número {numero} no es primo")  # Число не простое
+        
+#         # Прерываем цикл после успешного ввода и выполнения всех проверок
+#         break
+
+#     except ValueError:
+#         # Если ввод не является целым числом, возникнет исключение ValueError
+#         intentos -= 1  # Уменьшаем количество попыток
+#         if intentos > 0:
+#             # Если у нас еще есть попытки, выводим сообщение о необходимости ввести число
+#             print("Has de introducir un número entero. Te quedan", intentos, "intentos.")
+#         else:
+#             # Если попытки закончились, выводим финальное сообщение
+#             print("No has podido introducir un número entero en tres oportunidades. Puedes volverlo a intentar de nuevo ejecutando otra vez esta aplicación.")
+
+intentos = 3
 while intentos > 0:
     try:
-        # Пытаемся получить целое число от пользователя
-        numero = int(input("Escribe un número entero: "))  # Вводим число и пытаемся преобразовать в целое
-
-        # Проверяем, является ли число простым
+        numero = int(input("Escribe el numero entero:    "))
         if numero <= 1:
-            # Числа 1 и меньше не могут быть простыми
-            print(f"El número {numero} no es primo")  # Сообщаем, что число не простое
+            print(f"El numero {numero} no es primo")
         else:
-            # Флаг, который определяет, является ли число простым
-            es_primo = True  # Предполагаем, что число простое
-
-            # Проверка на делимость числа от 2 до самого числа - 1
-            for i in range(2, numero):  # Перебираем числа от 2 до числа-1
-                if numero % i == 0:  # Если число делится на i без остатка
-                    es_primo = False  # Значит, это не простое число
-                    break  # Останавливаем цикл, так как нашли делитель
-
-            # Выводим результат: если флаг es_primo остался True, то число простое
+            es_primo = True
+            for i in range (2, numero):
+                if numero % i == 0:
+                    es_primo = False
+                    break
             if es_primo:
-                print(f"El número {numero} es primo")  # Число простое
+                print(f"El numero {numero} es primo")
             else:
-                print(f"El número {numero} no es primo")  # Число не простое
-        
-        # Прерываем цикл после успешного ввода и выполнения всех проверок
+                print(f"El numero {numero} no es primo")
         break
 
     except ValueError:
-        # Если ввод не является целым числом, возникнет исключение ValueError
-        intentos -= 1  # Уменьшаем количество попыток
-        if intentos > 0:
-            # Если у нас еще есть попытки, выводим сообщение о необходимости ввести число
-            print("Has de introducir un número entero. Te quedan", intentos, "intentos.")
-        else:
-            # Если попытки закончились, выводим финальное сообщение
-            print("No has podido introducir un número entero en tres oportunidades. Puedes volverlo a intentar de nuevo ejecutando otra vez esta aplicación.")
-
+        intentos -= 1
+        print(f"No has introducido un número entero. Te quedan {intentos} intentos.")
+        if intentos == 0:
+            print("No has podido introducir un número entero en tres oportunidades \n Puedes volverlo a intentar de nuevo ejecutando otra vez esta aplicación")

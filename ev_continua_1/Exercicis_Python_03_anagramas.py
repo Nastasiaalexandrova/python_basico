@@ -24,3 +24,20 @@ Otro ejemplo:
     "Son anagramas --> No"
  
 """
+import os
+os.system("cls")
+
+print("Anagramas")
+primero = input("Escribe el primero texto____").lower().strip()
+segundo = input("Escribe el segundo texto____").lower().strip()
+if not primero.isalpha() and not segundo.isalpha():
+    print("Intentalo de nuevo sin numeros and otros simbolos")
+else: 
+    if len(primero.strip()) != len(segundo.strip()):
+        print("Son anagramas --> No")
+    else:
+        letras_1 = [primero.lower().strip()]
+        letras_2 = [segundo.lower().strip()]
+        for letra in letras_1:
+            if letras_1[letra] == letras_2[letra]:   
+            print("Son anagramas --> Si")
