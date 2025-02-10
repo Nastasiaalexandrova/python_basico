@@ -83,16 +83,16 @@ os.system("cls")
 #             # Если попытки закончились, выводим финальное сообщение
 #             print("No has podido introducir un número entero en tres oportunidades. Puedes volverlo a intentar de nuevo ejecutando otra vez esta aplicación.")
 
-intentos = 3
+intentos = 3  # establecemos los intentos
 while intentos > 0:
     try:
         numero = int(input("Escribe el numero entero:    "))
-        if numero <= 1:
+        if numero <= 1:   # si el numero es menos o igual que 1 - no es el primo
             print(f"El numero {numero} no es primo")
         else:
-            es_primo = True
-            for i in range (2, numero):
-                if numero % i == 0:
+            es_primo = True   #añadimos la logica si es primo
+            for i in range (2, numero):   #a partir del numero dos comprobamos si el numero es primo
+                if numero % i == 0:   #si el numero se puede dividir en otro aparte del 1 y al mismo numero - eso significa que no es primo
                     es_primo = False
                     break
             if es_primo:
@@ -101,7 +101,7 @@ while intentos > 0:
                 print(f"El numero {numero} no es primo")
         break
 
-    except ValueError:
+    except ValueError:   # contamos la cantidad de los intentos dejados
         intentos -= 1
         print(f"No has introducido un número entero. Te quedan {intentos} intentos.")
         if intentos == 0:

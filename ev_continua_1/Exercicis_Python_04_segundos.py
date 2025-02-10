@@ -25,17 +25,18 @@ os.system("cls")
 print("Conversor de segundos")
 segundos = input("Indice la cantidad del segundos:___") 
 
-if not segundos.isdigit():
+if not segundos.isdigit():   # comprobamos si el numero es el numero
     print("Intenta de nuevo")
 else:
-    segundos = int(segundos)
+    segundos = int(segundos)   # segundos usamos como el numero entero
     if segundos < 60:
-        print(f"{segundos} es menos que 1 minuto")
-    elif segundos >= 60 and segundos < 3600:
-        minutos = segundos // 60
-        segundos_resto_minutos = segundos % 60
-        print(f"{segundos} segundos son {minutos} minutos and {segundos_resto_minutos} segundos")
-    elif segundos >= 3600 and segundos < 86400:
+        print(f"{segundos} segundos es menos que 1 minuto")
+    elif segundos >= 60 and segundos < 3600:    # 3600segundos = 60 minutos, no incluimos 60 minutos porque eso es una hora ya
+        minutos = segundos // 60  #comprobaremos cuantos minutos enteros contiene esta cantidad de segundos
+        segundos_resto_minutos = segundos % 60   # contamos el resto de segundos
+        print(f"{segundos} segundos son {minutos} minutos and {segundos_resto_minutos} segundos") # y mostramos el resultado
+    elif segundos >= 3600 and segundos < 86400:  # 86400 es un dia --- pues miremos cuantas horas y no incluimos 24 horas porque eso es el 
+        #########  abajo tiene al misma logica del codigo
         horas = segundos // 3600
         minutos = (segundos % 3600) // 60
         segundos_resto_horas = segundos % 60
