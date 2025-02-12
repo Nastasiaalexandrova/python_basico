@@ -167,3 +167,4 @@ while True:
         case _:
             # Invalid option
             print("Opción no reconocida.\nVuélvelo a probar.")
+
