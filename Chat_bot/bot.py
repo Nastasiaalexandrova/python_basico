@@ -30,20 +30,17 @@ class BookingState(StatesGroup):
 from aiogram.filters import Command
 
 @dp.message(Command("start"))
-
 async def start(message: types.Message):
-    from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-
     # Create a keyboard with two buttons
     keyboard = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Button 1"), KeyboardButton(text="Button 2")]
+            [KeyboardButton(text="Button 1"), KeyboardButton(text="Button 2")],
+            [KeyboardButton("📅 Book an Appointment")]
         ],
         resize_keyboard=True
     )
-
-    keyboard.add(KeyboardButton("📅 Book an Appointment"))
     await message.answer("Welcome to the Beauty Salon! Click below to start booking:", reply_markup=keyboard)
+
 
 # 2️⃣ Begin Booking Process
 @dp.message(lambda msg: msg.text == "📅 Book an Appointment")

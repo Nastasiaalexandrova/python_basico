@@ -69,6 +69,23 @@ while compra_activa:
     #Leer el diccionario con los datos de la entradas
     for clave, valor in tipo_entrada.items():
         # menu += f"\n{clave.title()} : {valor:.2f}€"
-        menu += f"\n{clave.title()} : {valor:.2f}€"
+        menu += f"\n{clave.upper()}. {clave.capitalize()} : {valor:.2f}€"
 
+    menu += "\n\nF. Finalizar la compra"
+    menu += "\nX. Salir sin compra"
+    menu += "\n Elije el tipo de entrada"
+    menu += "\nA continuacion podra indicar la cantidad"
+
+    eleccion_entrada = input(menu).lower().strip()
+
+    if eleccion_entrada == "x":
+        print("\nAplicacion finalizada. Hasta pronto!")
+        compra_activa = False
+    elif eleccion_entrada == "f":
+        if lista_entradas_compradas:
+            pass
+            # compra_activa = False
+        else:
+            print("Aun no ha realizado la compra\n")
+            
 print(menu)
