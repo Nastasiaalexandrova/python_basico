@@ -50,31 +50,31 @@ Lo mismo que el ejercicio anterior, pero con palabras en lugar de letras.
 """
 
 import os
+
 os.system("cls")
 
-import string
+texto = input("Por favor, introduzca un texto: ").lower() # pedimos al usuario un texto
 
-# Просим пользователя ввести текст
-texto = input("Por favor, introduzca un texto: ").lower()
+contador = {} # creamos un diccionario para contar las letras
 
-# Создаем пустой словарь для подсчета букв
-contador = {}
-
-# Перебираем каждый символ в тексте
-for caracter in texto:
-    if caracter.isalpha():  # Проверяем, является ли символ буквой
-        if caracter in contador:  # Если буква уже в словаре, увеличиваем счетчик
-            contador[caracter] += 1
+for caracter in texto: # miramos cada carácter del texto
+    if caracter.isalpha():  # solo para letras
+        if caracter in contador:
+            contador[caracter] += 1  #si la letra ya está +1
         else:
-            contador[caracter] = 1  # Если буква встречается первый раз, добавляем ее в словарь
+            contador[caracter] = 1  # escribimos 1 para la primera vez
 
-# Сортируем буквы по количеству их вхождений (по убыванию), а затем по алфавиту
-letras_ordenadas = sorted(contador.items(), key=lambda x: (-x[1], x[0]))
+lista_letras = list(contador.items()) # cambio el diccionario en una lista de tuplas
 
-# Выводим результат
-print("El texto contiene las letras:")
-for letra, cantidad in letras_ordenadas:
+def criterio_ordenacion(item): # hacemos la funccion para ordenar
+    letra, cantidad = item
+    return -cantidad, letra  # cantidad desc y letras hacemos asc
+
+lista_ordenada = sorted(lista_letras, key=criterio_ordenacion) # sorteamos
+
+print("\nEl texto contiene las letras:") # el resultado
+for letra, cantidad in lista_ordenada:
     if cantidad > 1:
-        print(f"{letra}, {cantidad} veces")  # Если буква встречается больше 1 раза
+        print(f"{letra}, {cantidad} veces")
     else:
-        print(f"{letra}, 1 vez")  # Если буква встречается 1 раз
+        print(f"{letra}, 1 vez")
