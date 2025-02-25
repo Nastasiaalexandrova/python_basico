@@ -18,78 +18,132 @@ cliente_1 = Cliente("Anna")
 restaurante_1 = Restaurante("Can Pizza", "Italiana", [13, 14, 15, 20, 21, 22])
 
 """
-import os
-os.system("cls")
+# import os
+# os.system("cls")
 
-class Cliente:
+# class Cliente:
+#     def __init__(self, nombre):
+#         self.nombre = nombre
+
+# class Restaurante:
+#     def __init__(self, nombre, especialidad, turnos):
+#         self.nombre = nombre
+#         self.especialidad = especialidad
+#         self.turnos = {turno: [] for turno in turnos}  # Diccionario para almacenar las reservas de cada turno
+    
+#     def reservar(self, turno, cliente):
+#         if turno not in self.turnos:
+#             print(f"El turno {turno} no está disponible en {self.nombre}.")
+#             return False
+        
+#         if len(self.turnos[turno]) < 3:  # Comprobar si el turno tiene menos de 3 clientes
+#             self.turnos[turno].append(cliente.nombre)  # Añadir el nombre del cliente a la lista de ese turno
+#             print(f"Reserva realizada a {cliente.nombre} en {self.nombre} a las {turno}.")
+#             return True
+#         else:
+#             print(f"No se ha podido realizar la reserva para {cliente.nombre}. Pruebe en otro turno.")
+#             return False
+
+# restaurante_1 = Restaurante("Can Pizza", "Italiana", [13, 14, 15, 20, 21, 22])
+# restaurante_2 = Restaurante("Don Chingon", "Mexicana", [13, 14, 15, 20, 21, 22])
+# restaurante_3 = Restaurante("El Pueblo Libre", "Peruana", [13, 14, 15, 20, 21, 22])
+# restaurante_4 = Restaurante("3 Focs", "Catalana", [13, 14, 15, 20, 21, 22])
+
+# saludo = print("\n\n\nHola! Bienvenido al servicio de reservas!\n")
+# while True:
+#     menu = """
+#     Hoy puedes disfrutar los siguientes:
+#     1. "Can Pizza" con la cocina Italiana
+#     2. "Don Chingon" con la cocina Mexicana
+#     3. "El Pueblo Libre" con la cocina Peruana
+#     4. "3 Focs" con la cocina Catalana
+#     """
+#     print(menu)
+    
+#     # Elección del restaurante por el usuario
+#     restaurante_eleccion = input("Elige el restaurante (1, 2, 3, 4) para hacer la reserva -->  ")
+    
+#     if restaurante_eleccion == '1':
+#         restaurante = restaurante_1
+#     elif restaurante_eleccion == '2':
+#         restaurante = restaurante_2
+#     elif restaurante_eleccion == '3':
+#         restaurante = restaurante_3
+#     elif restaurante_eleccion == '4':
+#         restaurante = restaurante_4
+#     else:
+#         print("Opción inválida. Por favor, elige un número entre 1 y 4.")
+#         continue
+    
+#     # Pedir el nombre del cliente
+#     cliente_nombre = input("Introduce tu nombre: ")
+#     cliente = Cliente(cliente_nombre)
+    
+#     # Pedir el turno de la reserva
+#     turno = int(input(f"Elige el turno (de los disponibles: {restaurante.turnos.keys()}): "))
+    
+#     # Intentar hacer la reserva
+#     restaurante.reservar(turno, cliente)
+    
+#     # Preguntar si quiere hacer otra reserva
+#     otra_reserva = input("¿Quieres hacer otra reserva? (sí/no): ")
+#     if otra_reserva.lower() != 'sí':
+#         print("¡Gracias por usar nuestro servicio de reservas!")
+#         break
+
+
+
+
+#### Ferran
+class Cliente():
     def __init__(self, nombre):
         self.nombre = nombre
 
-class Restaurante:
-    def __init__(self, nombre, especialidad, turnos):
+anna = Cliente("Anna")
+
+class Restaurante():
+    """Restaurante: nombre, especialidad, turnos"""
+    def __init__(self, nombre: str, cocina: str, turnos: list):
         self.nombre = nombre
-        self.especialidad = especialidad
-        self.turnos = {turno: [] for turno in turnos}  # Diccionario para almacenar las reservas de cada turno
-    
-    def reservar(self, turno, cliente):
-        if turno not in self.turnos:
-            print(f"El turno {turno} no está disponible en {self.nombre}.")
-            return False
-        
-        if len(self.turnos[turno]) < 3:  # Comprobar si el turno tiene menos de 3 clientes
-            self.turnos[turno].append(cliente.nombre)  # Añadir el nombre del cliente a la lista de ese turno
-            print(f"Reserva realizada a {cliente.nombre} en {self.nombre} a las {turno}.")
-            return True
+        self.especialidad = cocina
+        self.turnos = turnos
+        # Atributo para controlar los turnos
+        self.reservas = {}
+        for turno in turnos:
+            self.reservas[turno] = 0 #'reservas': {12: 0, 13: 0, 14: 0, 15: 0, 20: 0, 21: 0}
+
+    def reservar(self, cliente, hora_reserva):
+        # Comprobar si la hora solicitada esta en los turnos disponibles
+        if hora_reserva not in self.turnos:
+            lista_turnos = [str(turno) for turno in self.turnos]
+            mensaje = f"Lo sentimos, no es posible la reseva a las {hora_reserva}. \n"
+            # mensaje += f"Horarios disponibles: " + ", ".join(self.turnos)
+            mensaje += f"Horarios disponibles: " + ", ".join(lista_turnos) + " horas"
+            return mensaje
+        #  Comprobar si hay sitio en el turno
+        if self.reservas[hora_reserva] < 3:
+            self.reservas[hora_reserva] += 1
+            return f"Reserva realizada a {cliente.nombre} en {self.nombre} a las {hora_reserva} horas."
+
         else:
-            print(f"No se ha podido realizar la reserva para {cliente.nombre}. Pruebe en otro turno.")
-            return False
+            return f"No se ha podido realizar la reserva para {cliente.nombre}. Pruebe en otro turno."           
 
-restaurante_1 = Restaurante("Can Pizza", "Italiana", [13, 14, 15, 20, 21, 22])
-restaurante_2 = Restaurante("Don Chingon", "Mexicana", [13, 14, 15, 20, 21, 22])
-restaurante_3 = Restaurante("El Pueblo Libre", "Peruana", [13, 14, 15, 20, 21, 22])
-restaurante_4 = Restaurante("3 Focs", "Catalana", [13, 14, 15, 20, 21, 22])
 
-saludo = print("\n\n\nHola! Bienvenido al servicio de reservas!\n")
-while True:
-    menu = """
-    Hoy puedes disfrutar los siguientes:
-    1. "Can Pizza" con la cocina Italiana
-    2. "Don Chingon" con la cocina Mexicana
-    3. "El Pueblo Libre" con la cocina Peruana
-    4. "3 Focs" con la cocina Catalana
-    """
-    print(menu)
-    
-    # Elección del restaurante por el usuario
-    restaurante_eleccion = input("Elige el restaurante (1, 2, 3, 4) para hacer la reserva -->  ")
-    
-    if restaurante_eleccion == '1':
-        restaurante = restaurante_1
-    elif restaurante_eleccion == '2':
-        restaurante = restaurante_2
-    elif restaurante_eleccion == '3':
-        restaurante = restaurante_3
-    elif restaurante_eleccion == '4':
-        restaurante = restaurante_4
-    else:
-        print("Opción inválida. Por favor, elige un número entre 1 y 4.")
-        continue
-    
-    # Pedir el nombre del cliente
-    cliente_nombre = input("Introduce tu nombre: ")
-    cliente = Cliente(cliente_nombre)
-    
-    # Pedir el turno de la reserva
-    turno = int(input(f"Elige el turno (de los disponibles: {restaurante.turnos.keys()}): "))
-    
-    # Intentar hacer la reserva
-    restaurante.reservar(turno, cliente)
-    
-    # Preguntar si quiere hacer otra reserva
-    otra_reserva = input("¿Quieres hacer otra reserva? (sí/no): ")
-    if otra_reserva.lower() != 'sí':
-        print("¡Gracias por usar nuestro servicio de reservas!")
-        break
+napoli = Restaurante("Napoli", "Italiana", (12, 13, 14, 15, 20, 21)) #'reservas': {12: 0, 13: 0, 14: 0, 15: 0, 20: 0, 21: 0}
+print(napoli.__doc__) #Restaurante: nombre, especialidad, turnos
+print(napoli.__dict__) #{'nombre': 'Napoli', 'especialidad': 'Italiana', 'turnos': [12, 13, 14, 15, 20, 21]}
+print(napoli.reservar(anna, 14))
+
+
+
+
+
+
+
+
+
+
+
 
 
 
