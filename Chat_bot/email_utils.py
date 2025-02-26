@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 # Replace with your email settings
 EMAIL_SENDER = "your_email@example.com"
 EMAIL_PASSWORD = "your_password"
-SMTP_SERVER = "smtp.example.com"
+SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587  # Usually 587 for TLS
 
 async def send_email(recipient, subject, body):
@@ -21,7 +21,8 @@ async def send_email(recipient, subject, body):
             port=SMTP_PORT,
             username=EMAIL_SENDER,
             password=EMAIL_PASSWORD,
-            use_tls=False,
+            use_tls=True,
+            # use_tls=False,
             start_tls=True,
         )
         print(f"✅ Email sent to {recipient}")
