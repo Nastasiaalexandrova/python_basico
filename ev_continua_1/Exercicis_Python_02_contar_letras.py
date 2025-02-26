@@ -62,7 +62,7 @@ for caracter in texto: # miramos cada carácter del texto
         if caracter in contador:
             contador[caracter] += 1  #si la letra ya está +1
         else:
-            contador[caracter] = 1  # escribimos 1 para la primera vez
+            contador[caracter] = 1  # escribimos 1 para primera vez
 
 lista_letras = list(contador.items()) # cambio el diccionario en una lista de tuplas
 
