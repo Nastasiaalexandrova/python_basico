@@ -1,3 +1,12 @@
+##########possible isues and things to change:
+# logics of how we use close_chat checking the existing appointments
+# change email
+# change username to first_name
+
+
+
+
+
 # import logging
 # import asyncio
 # from aiogram import Bot, Dispatcher, types
@@ -273,7 +282,7 @@ import logging
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.types import ParseMode #parsemode added
+# from aiogram.types import ParseMode #parsemode added
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
@@ -284,7 +293,8 @@ import sqlite3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from aiogram.utils import executor #added
+# from aiogram.dispatcher import FSMContext
+# from aiogram.utils import executor #added
 
 # Configure logging
 logging.basicConfig(
@@ -419,24 +429,33 @@ def send_email(recipient, name, service, sub_option, additional_option, date_str
 async def start(message: types.Message):
     try:
         logger.info(f"Received /start command from user_id: {message.from_user.id}")
+        # Get the username of the user
+        user = message.from_user
+        # username = user.username if user.username else user.first_name
+        first_name = user.first_name if user.first_name else user.username
+
         keyboard = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton(text="📅 Записаться на прием")]
+                [KeyboardButton(text="📅 Make an appointment")],
+                [KeyboardButton(text="👋 Close chat")]
             ],
             resize_keyboard=True
         )
-        await message.answer("Добро пожаловать в салон красоты Ромашка! Нажмите на кнопку ниже, чтобы записаться:", reply_markup=keyboard)
+        await message.answer(
+            f"Welcome to the Romashka Beauty Salon, {first_name.capitalize()}! Click the button below to sign up:", 
+            reply_markup=keyboard
+        )
         logger.info(f"Successfully sent welcome message to user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in /start command: {e}", exc_info=True)
 
 # Begin Booking Process
-@dp.message(lambda msg: msg.text == "📅 Записаться на прием")
+@dp.message(lambda msg: msg.text == "📅 Make an appointment")
 async def ask_service(message: types.Message, state: FSMContext):
     try:
         await state.set_state(BookingState.service)
         keyboard = InlineKeyboardMarkup(inline_keyboard=[])
-        services = ["Маникюр", "Педикюр", "Стрижка", "Покраска волос", "Кератин", "Наращивание ресниц"]
+        services = ["Manicure", "Pedicure", "Hair cut", "Hair coloring", "Keratin", "Eyelash extension"]
         
         # Build keyboard in rows of 2 buttons
         for i in range(0, len(services), 2):
@@ -446,7 +465,7 @@ async def ask_service(message: types.Message, state: FSMContext):
                 row.append(InlineKeyboardButton(text=services[i+1], callback_data=f"service_{services[i+1]}"))
             keyboard.inline_keyboard.append(row)
         
-        await message.answer("Выберите услугу:", reply_markup=keyboard)
+        await message.answer("Choose the service:", reply_markup=keyboard)
         logger.info(f"Asked for service from user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in ask_service: {e}", exc_info=True)
@@ -461,31 +480,31 @@ async def process_service(callback_query: types.CallbackQuery, state: FSMContext
         # Different options based on service type
         keyboard = InlineKeyboardMarkup(inline_keyboard=[])
         
-        if service in ["Стрижка", "Покраска волос", "Кератин"]:
+        if service in ["Hair cut", "Hair coloring", "Keratin"]:
             # Hair length options
-            options = ["До 15 см", "До 30 см", "Длиннее 30 см"]
+            options = ["Up to 15 cm", "Up to 30 cm", "Longer than 30 cm"]
             for option in options:
                 keyboard.inline_keyboard.append([
                     InlineKeyboardButton(text=option, callback_data=f"sub_{option}")
                 ])
                 
-        elif service in ["Маникюр", "Педикюр"]:
+        elif service in ["Manicure", "Pedicure"]:
             # Manicure/pedicure options
-            options = ["Аппаратный", "Классический"]
+            options = ["Hardware", "Classical"]
             for option in options:
                 keyboard.inline_keyboard.append([
                     InlineKeyboardButton(text=option, callback_data=f"sub_{option}")
                 ])
         else:
             # For eyelash extensions, go directly to name
-            await state.update_data(sub_option="Стандартный", additional_option="Стандартный")
+            await state.update_data(sub_option="Standard", additional_option="Standard")
             await state.set_state(BookingState.name)
-            await bot.send_message(callback_query.from_user.id, "Введите ваше полное имя:")
+            await bot.send_message(callback_query.from_user.id, "Enter your full name:")
             await callback_query.answer()
             return
             
         await state.set_state(BookingState.sub_option)
-        await bot.send_message(callback_query.from_user.id, "Выберите вариант:", reply_markup=keyboard)
+        await bot.send_message(callback_query.from_user.id, "Choose your option:", reply_markup=keyboard)
         
         await callback_query.answer()
         logger.info(f"Selected service: {service} for user_id: {callback_query.from_user.id}")
@@ -500,19 +519,19 @@ async def process_sub_option(callback_query: types.CallbackQuery, state: FSMCont
         await state.update_data(sub_option=sub_option)
         user_data = await state.get_data()
         
-        if user_data["service"] in ["Маникюр", "Педикюр"]:
+        if user_data["service"] in ["Manicure", "Pedicure"]:
             # For manicure/pedicure, ask about permanent/without color
             keyboard = InlineKeyboardMarkup(inline_keyboard=[
-                [InlineKeyboardButton(text="С покрытием", callback_data="add_permanent")],
-                [InlineKeyboardButton(text="Без покрытия", callback_data="add_without")]
+                [InlineKeyboardButton(text="Coated", callback_data="add_permanent")],
+                [InlineKeyboardButton(text="Uncoated", callback_data="add_without")]
             ])
             await state.set_state(BookingState.additional_option)
-            await bot.send_message(callback_query.from_user.id, "Выберите дополнительный вариант:", reply_markup=keyboard)
+            await bot.send_message(callback_query.from_user.id, "Choose an additional option:", reply_markup=keyboard)
         else:
             # For hair services, go to name input
-            await state.update_data(additional_option="Стандартный")
+            await state.update_data(additional_option="Standard")
             await state.set_state(BookingState.name)
-            await bot.send_message(callback_query.from_user.id, "Введите ваше полное имя:")
+            await bot.send_message(callback_query.from_user.id, "Enter your full name:")
         
         await callback_query.answer()
         logger.info(f"Selected sub-option: {sub_option} for user_id: {callback_query.from_user.id}")
@@ -528,7 +547,7 @@ async def process_additional_option(callback_query: types.CallbackQuery, state: 
         
         # Move to collecting personal info
         await state.set_state(BookingState.name)
-        await bot.send_message(callback_query.from_user.id, "Введите ваше полное имя:")
+        await bot.send_message(callback_query.from_user.id, "Enter your full name:")
         
         await callback_query.answer()
         logger.info(f"Selected additional option: {additional_option} for user_id: {callback_query.from_user.id}")
@@ -538,10 +557,14 @@ async def process_additional_option(callback_query: types.CallbackQuery, state: 
 # Handle name input
 @dp.message(BookingState.name)
 async def process_name(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()  # Get current FSM state
+    if not current_state:  # If FSM is inactive, ignore the input
+        logger.info(f"Ignoring input after chat closure from user_id: {message.from_user.id}")
+        return
     try:
         await state.update_data(name=message.text)
         await state.set_state(BookingState.phone)
-        await message.answer("Введите ваш номер телефона:")
+        await message.answer("Enter your phone number:")
         logger.info(f"Received name: {message.text} from user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in process_name: {e}", exc_info=True)
@@ -549,10 +572,14 @@ async def process_name(message: types.Message, state: FSMContext):
 # Handle phone input
 @dp.message(BookingState.phone)
 async def process_phone(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()  # Get current FSM state
+    if not current_state:  # If FSM is inactive, ignore the input
+        logger.info(f"Ignoring input after chat closure from user_id: {message.from_user.id}")
+        return
     try:
         await state.update_data(phone=message.text)
         await state.set_state(BookingState.email)
-        await message.answer("Введите ваш email для получения подтверждения:")
+        await message.answer("Enter your email to receive confirmation:")
         logger.info(f"Received phone: {message.text} from user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in process_phone: {e}", exc_info=True)
@@ -560,6 +587,10 @@ async def process_phone(message: types.Message, state: FSMContext):
 # Handle email input
 @dp.message(BookingState.email)
 async def process_email(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()  # Get current FSM state
+    if not current_state:  # If FSM is inactive, ignore the input
+        logger.info(f"Ignoring input after chat closure from user_id: {message.from_user.id}")
+        return
     try:
         await state.update_data(email=message.text)
         await state.set_state(BookingState.date)
@@ -578,7 +609,7 @@ async def process_email(message: types.Message, state: FSMContext):
                 InlineKeyboardButton(text=f"{month_name} {month_date.year}", callback_data=f"month_{month_year}")
             ])
         
-        await message.answer("Выберите месяц для записи:", reply_markup=keyboard)
+        await message.answer("Select the month to be recorded:", reply_markup=keyboard)
         logger.info(f"Received email: {message.text} from user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in process_email: {e}", exc_info=True)
@@ -629,12 +660,12 @@ async def process_month(callback_query: types.CallbackQuery, state: FSMContext):
             
         # Add back button
         keyboard.inline_keyboard.append([
-            InlineKeyboardButton(text="« Назад к выбору месяца", callback_data="back_to_months")
+            InlineKeyboardButton(text="« Back to the selection of the month", callback_data="back_to_months")
         ])
         
         await bot.send_message(
             callback_query.from_user.id, 
-            f"Выберите день для записи (показаны только дни со свободным временем):",
+            f"Select the day to record (only days with free time are shown)):",
             reply_markup=keyboard
         )
         
@@ -663,7 +694,7 @@ async def back_to_months(callback_query: types.CallbackQuery, state: FSMContext)
         
         await bot.send_message(
             callback_query.from_user.id,
-            "Выберите месяц для записи:",
+            "Select the month to be recorded:",
             reply_markup=keyboard
         )
         
@@ -689,13 +720,13 @@ async def process_date(callback_query: types.CallbackQuery, state: FSMContext):
             
         # Add back button
         keyboard.inline_keyboard.append([
-            InlineKeyboardButton(text="« Назад к выбору дня", callback_data=f"back_to_days")
+            InlineKeyboardButton(text="« Back to choosing a day", callback_data=f"back_to_days")
         ])
         
         formatted_date = datetime.strptime(date_str, '%Y-%m-%d').strftime('%d.%m.%Y')
         await bot.send_message(
             callback_query.from_user.id,
-            f"Выберите удобное время для записи на {formatted_date}:",
+            f"Choose a convenient time to make an appointment at {formatted_date}:",
             reply_markup=keyboard
         )
         
@@ -738,21 +769,21 @@ async def process_time(callback_query: types.CallbackQuery, state: FSMContext):
         formatted_date = datetime.strptime(user_data["date"], '%Y-%m-%d').strftime('%d.%m.%Y')
         
         confirmation_text = f"""
-Пожалуйста, подтвердите вашу запись:
+Please confirm your appointment:
 
-Имя: {user_data['name']}
-Телефон: {user_data['phone']}
+Name: {user_data['name']}
+Phone number: {user_data['phone']}
 Email: {user_data['email']}
-Услуга: {user_data['service']}
-Вариант: {user_data['sub_option']}
-Дополнительно: {user_data['additional_option']}
-Дата: {formatted_date}
-Время: {time_str}
+Service: {user_data['service']}
+Option: {user_data['sub_option']}
+Additionally: {user_data['additional_option']}
+Date: {formatted_date}
+Time: {time_str}
         """
         
         keyboard = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm_booking")],
-            [InlineKeyboardButton(text="❌ Отменить", callback_data="cancel_booking")]
+            [InlineKeyboardButton(text="✅ Confirm", callback_data="confirm_booking")],
+            [InlineKeyboardButton(text="❌ Cancel", callback_data="cancel_booking")]
         ])
         
         await bot.send_message(
@@ -797,28 +828,28 @@ async def confirm_booking(callback_query: types.CallbackQuery, state: FSMContext
                 user_data['time']
             )
             
-            email_status = "Письмо с подтверждением отправлено на ваш email." if email_sent else "Не удалось отправить письмо с подтверждением."
+            email_status = "A confirmation email has been sent to your email address." if email_sent else "Failed to send a confirmation e-mail."
             
             formatted_date = datetime.strptime(user_data["date"], '%Y-%m-%d').strftime('%d.%m.%Y')
             
             await bot.send_message(
                 callback_query.from_user.id,
                 f"""
-Ваша запись успешно подтверждена!
+Your appointment has been successfully confirmed!
 
-Имя: {user_data['name']}
-Услуга: {user_data['service']} ({user_data['sub_option']}, {user_data['additional_option']})
-Дата и время: {formatted_date}, {user_data['time']}
+Name: {user_data['name']}
+Service: {user_data['service']} ({user_data['sub_option']}, {user_data['additional_option']})
+Date and time: {formatted_date}, {user_data['time']}
 
 {email_status}
 
-Спасибо за запись в салон красоты Ромашка!
+Thank you for the appointment at Romashka Beauty Salon!
                 """
             )
         else:
             await bot.send_message(
                 callback_query.from_user.id,
-                "К сожалению, произошла ошибка при создании записи. Пожалуйста, попробуйте снова или свяжитесь с нами по телефону."
+                "Unfortunately, there was an error in creating the record. Please try again or contact us by phone."
             )
         
         # Reset state
@@ -827,13 +858,14 @@ async def confirm_booking(callback_query: types.CallbackQuery, state: FSMContext
         # Offer to book again
         keyboard = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton(text="📅 Записаться на прием")]
+                [KeyboardButton(text="📅 Make an appointment")],
+                [KeyboardButton(text="👋 Close chat")]
             ],
             resize_keyboard=True
         )
         await bot.send_message(
             callback_query.from_user.id,
-            "Хотите записаться на еще одну услугу?",
+            "Would you like to sign up for another service?",
             reply_markup=keyboard
         )
         
@@ -850,14 +882,15 @@ async def cancel_booking(callback_query: types.CallbackQuery, state: FSMContext)
         
         keyboard = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton(text="📅 Записаться на прием")]
+                [KeyboardButton(text="📅 Make an appointment")],
+                [KeyboardButton(text="👋 Close chat")]
             ],
             resize_keyboard=True
         )
         
         await bot.send_message(
             callback_query.from_user.id,
-            "Запись отменена. Вы можете начать новую запись в любое время.",
+            "The record's been canceled. You can start a new recording at any time.",
             reply_markup=keyboard
         )
         
@@ -866,13 +899,134 @@ async def cancel_booking(callback_query: types.CallbackQuery, state: FSMContext)
     except Exception as e:
         logger.error(f"Error in cancel_booking: {e}", exc_info=True)
 
+# Add handler for Close chat button@dp.message(lambda msg: msg.text == "👋 Close chat")
+#######################################################################
+# was replaced with the cde below it
+# 
+######the code that replaced the previous
+@dp.message(lambda msg: msg.text == "👋 Close chat")
+async def close_chat(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()  # Get current FSM state
+    if current_state is None:
+        logger.info(f"Ignoring input after chat closure from user_id: {message.from_user.id}")
+        return  # Ignore if FSM is not active or the chat is already closed
+    try:
+        logger.info(f"Close chat button clicked by user_id: {message.from_user.id}")
+
+        # First send a confirmation that we received the close request
+        await message.answer("Processing your request to close the chat...")
+
+        # Clear the FSM state (end the conversation)
+        # await state.finish()  # This ends the FSM state
+        # logger.info("FSM state finished and cleared successfully")
+
+        # Retrieve user data BEFORE clearing state
+        user_data = await state.get_data()
+
+        # Now clear the state to stop FSM processes
+        await state.clear()
+        await state.set_state(None)  # Forcefully exit any FSM state
+
+        logger.info("State cleared successfully")
+
+        has_appointments = False
+        farewell_message = "Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!"
+
+        # Check if the user has any confirmed appointments in the database
+        if 'phone' in user_data:
+            try:
+                conn = sqlite3.connect("salon_bookings.db")
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM bookings WHERE phone = ?", (user_data['phone'],))
+                count = cursor.fetchone()[0]
+                has_appointments = count > 0
+                logger.info(f"User has appointments: {has_appointments}, count: {count}")
+            except Exception as db_error:
+                logger.error(f"Database error in close_chat: {db_error}", exc_info=True)
+            finally:
+                conn.close()  # Ensure connection is always closed
+
+            if has_appointments:
+                farewell_message = "Thank you for booking with Romashka Beauty Salon! We look forward to seeing you on your appointment day. Have a great day!"
+
+        # Create a restart keyboard
+        start_keyboard = ReplyKeyboardMarkup(
+            keyboard=[[KeyboardButton(text="📅 Start new appointment")]],
+            resize_keyboard=True
+        )
+
+        # Send farewell message
+        try:
+            await message.answer(farewell_message, reply_markup=start_keyboard)
+            logger.info(f"Sent farewell message: '{farewell_message}'")
+        except Exception as send_error:
+            logger.error(f"Error sending farewell message: {send_error}", exc_info=True)
+
+        logger.info(f"Chat closed for user_id: {message.from_user.id}")
+
+    except Exception as e:
+        logger.error(f"Error in close_chat: {e}", exc_info=True)
+        try:
+            await message.answer("Sorry, there was an error processing your request. Please try again.")
+        except:
+            pass  # Avoid breaking the bot if message sending fails
+
+# Add handler for the new "Start new appointment" button
+# Handler for "Start new appointment" button
+@dp.message(lambda msg: msg.text == "📅 Start new appointment")
+async def restart_appointment(message: types.Message):
+    try:
+        keyboard = ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton(text="📅 Make an appointment")],
+                [KeyboardButton(text="👋 Close chat")]
+            ],
+            resize_keyboard=True
+        )
+        await message.answer(
+            "Welcome back to Romashka Beauty Salon! What would you like to do?", 
+            reply_markup=keyboard
+        )
+        logger.info(f"Restarted conversation for user_id: {message.from_user.id}")
+    except Exception as e:
+        logger.error(f"Error in restart_appointment: {e}", exc_info=True)
+
+
+
+
+
 # General message handler to catch all messages
+# First, modify the general message handler to catch "Close chat" regardless of state
 @dp.message()
-async def echo_all(message: types.Message):
+async def echo_all(message: types.Message, state: FSMContext):
     logger.info(f"Received message: '{message.text}' from user_id: {message.from_user.id}")
+    
+    # Check if the message is "Close chat" regardless of current state
+    # if message.text == "👋 Close chat":
+    #     # Clear the current state
+    #     current_state = await state.get_state()
+    #     logger.info(f"Intercepted Close chat while in state: {current_state}")
+    #     await state.clear()
+        
+    #     # Prepare farewell message (simplified version without DB check)
+    #     farewell_message = "Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!"
+        
+    #     # Send farewell message with a restart button
+    #     start_keyboard = ReplyKeyboardMarkup(
+    #         keyboard=[
+    #             [KeyboardButton(text="📅 Start new appointment")]
+    #         ],
+    #         resize_keyboard=True
+    #     )
+        
+    #     await message.answer(farewell_message, reply_markup=start_keyboard)
+    #     logger.info(f"Chat closed for user_id: {message.from_user.id}")
+    #     return  # Important: return here to prevent further processing
+    
+    # Regular command checking logic for other messages
     if message.text and message.text.startswith('/'):
         logger.warning(f"Received unhandled command: {message.text}")
-        await message.answer(f"Получена команда {message.text}, но она не была обработана. Попробуйте /start.")
+        await message.answer(f"Command received {message.text}, but it hasn't been processed. Try /start.")
 
 async def main():
     try:
