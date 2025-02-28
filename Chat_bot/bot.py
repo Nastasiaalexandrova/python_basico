@@ -273,6 +273,7 @@ import logging
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ParseMode #parsemode added
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
@@ -283,6 +284,7 @@ import sqlite3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from aiogram.utils import executor #added
 
 # Configure logging
 logging.basicConfig(
@@ -301,9 +303,9 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
 
 # Email configuration
-EMAIL_SENDER = "salon.romashka@example.com"
-EMAIL_PASSWORD = "your_email_password"
-SMTP_SERVER = "smtp.example.com"
+EMAIL_SENDER = "your.telegram.chat.bot@gmail.com"
+EMAIL_PASSWORD = "clkf lzgw bcsd sess"
+SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
 # Define FSM states
