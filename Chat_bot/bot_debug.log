@@ -2769,3 +2769,501 @@ UnicodeEncodeError: 'ascii' codec can't encode character '\U0001f44b' in positio
 2025-02-28 08:40:55,895 - aiogram.event - INFO - Update id=619473252 is handled. Duration 0 ms by bot id=7690334241
 2025-02-28 08:42:01,067 - aiogram.dispatcher - INFO - Polling stopped
 2025-02-28 08:42:01,314 - aiogram.dispatcher - INFO - Polling stopped for bot @RomashkaBCNbot id=7690334241 - 'Salon Romashka'
+2025-02-28 19:54:03,218 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-02-28 19:54:03,228 - __main__ - INFO - Database initialized
+2025-02-28 19:54:03,228 - __main__ - INFO - Starting the bot...
+2025-02-28 19:54:03,228 - aiogram.dispatcher - INFO - Start polling
+2025-02-28 19:54:03,391 - aiogram.dispatcher - INFO - Polling stopped
+2025-02-28 19:54:03,647 - __main__ - CRITICAL - Critical error when starting the bot: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1123, in _wrap_create_connection
+    connection = await self._loop.create_connection(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1149, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1182, in _create_connection_transport
+    await waiter
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 578, in _on_handshake_complete
+    raise handshake_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 560, in _do_handshake
+    self._sslobj.do_handshake()
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 917, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    async with session.post(
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 1425, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 703, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 548, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1056, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1411, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1380, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1129, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Stucom\python_basico\python_basico\Chat_bot\bot.py", line 1037, in main
+    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 551, in start_polling
+    await asyncio.gather(*done)
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 340, in _polling
+    user: User = await bot.me()
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 370, in me
+    self._me = await self.get_me()
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 1874, in get_me
+    return await self(call, request_timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 184, in make_request
+    raise TelegramNetworkError(method=method, message=f"{type(e).__name__}: {e}")
+aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-02-28 19:54:40,823 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-02-28 19:54:40,827 - __main__ - INFO - Database initialized
+2025-02-28 19:54:40,827 - __main__ - INFO - Starting the bot...
+2025-02-28 19:54:40,827 - aiogram.dispatcher - INFO - Start polling
+2025-02-28 19:54:40,979 - aiogram.dispatcher - INFO - Polling stopped
+2025-02-28 19:54:41,236 - __main__ - CRITICAL - Critical error when starting the bot: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1123, in _wrap_create_connection
+    connection = await self._loop.create_connection(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1149, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1182, in _create_connection_transport
+    await waiter
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 578, in _on_handshake_complete
+    raise handshake_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 560, in _do_handshake
+    self._sslobj.do_handshake()
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 917, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    async with session.post(
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 1425, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 703, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 548, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1056, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1411, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1380, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1129, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Stucom\python_basico\python_basico\Chat_bot\bot.py", line 1037, in main
+    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 551, in start_polling
+    await asyncio.gather(*done)
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 340, in _polling
+    user: User = await bot.me()
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 370, in me
+    self._me = await self.get_me()
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 1874, in get_me
+    return await self(call, request_timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 184, in make_request
+    raise TelegramNetworkError(method=method, message=f"{type(e).__name__}: {e}")
+aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-02-28 19:54:49,662 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-02-28 19:54:49,665 - __main__ - INFO - Database initialized
+2025-02-28 19:54:49,665 - __main__ - INFO - Starting the bot...
+2025-02-28 19:54:49,665 - aiogram.dispatcher - INFO - Start polling
+2025-02-28 19:54:49,875 - aiogram.dispatcher - INFO - Polling stopped
+2025-02-28 19:54:50,126 - __main__ - CRITICAL - Critical error when starting the bot: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1123, in _wrap_create_connection
+    connection = await self._loop.create_connection(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1149, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1182, in _create_connection_transport
+    await waiter
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 578, in _on_handshake_complete
+    raise handshake_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 560, in _do_handshake
+    self._sslobj.do_handshake()
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 917, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    async with session.post(
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 1425, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 703, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 548, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1056, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1411, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1380, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1129, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Stucom\python_basico\python_basico\Chat_bot\bot.py", line 1037, in main
+    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 551, in start_polling
+    await asyncio.gather(*done)
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 340, in _polling
+    user: User = await bot.me()
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 370, in me
+    self._me = await self.get_me()
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 1874, in get_me
+    return await self(call, request_timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 184, in make_request
+    raise TelegramNetworkError(method=method, message=f"{type(e).__name__}: {e}")
+aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-02-28 19:55:15,460 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-02-28 19:55:15,463 - __main__ - INFO - Database initialized
+2025-02-28 19:55:15,464 - __main__ - INFO - Starting the bot...
+2025-02-28 19:55:15,464 - aiogram.dispatcher - INFO - Start polling
+2025-02-28 19:55:15,584 - aiogram.dispatcher - INFO - Polling stopped
+2025-02-28 19:55:15,845 - __main__ - CRITICAL - Critical error when starting the bot: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1123, in _wrap_create_connection
+    connection = await self._loop.create_connection(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1149, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1182, in _create_connection_transport
+    await waiter
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 578, in _on_handshake_complete
+    raise handshake_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\asyncio\sslproto.py", line 560, in _do_handshake
+    self._sslobj.do_handshake()
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 917, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    async with session.post(
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 1425, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\client.py", line 703, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 548, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1056, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1411, in _create_direct_connection
+    raise last_exc
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1380, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiohttp\connector.py", line 1129, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Stucom\python_basico\python_basico\Chat_bot\bot.py", line 1037, in main
+    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 551, in start_polling
+    await asyncio.gather(*done)
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 340, in _polling
+    user: User = await bot.me()
+                 ^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 370, in me
+    self._me = await self.get_me()
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 1874, in get_me
+    return await self(call, request_timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasiia\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\client\session\aiohttp.py", line 184, in make_request
+    raise TelegramNetworkError(method=method, message=f"{type(e).__name__}: {e}")
+aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-02-28 19:59:35,250 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-02-28 19:59:35,270 - __main__ - INFO - Database initialized
+2025-02-28 19:59:35,271 - __main__ - INFO - Starting the bot...
+2025-02-28 19:59:35,271 - aiogram.dispatcher - INFO - Start polling
+2025-02-28 19:59:35,628 - aiogram.dispatcher - INFO - Run polling for bot @RomashkaBCNbot id=7690334241 - 'Salon Romashka'
+2025-02-28 19:59:35,752 - __main__ - INFO - Received /start command from user_id: 310259261
+2025-02-28 19:59:36,030 - __main__ - INFO - Successfully sent welcome message to user_id: 310259261
+2025-02-28 19:59:36,031 - aiogram.event - INFO - Update id=619473254 is handled. Duration 281 ms by bot id=7690334241
+2025-02-28 19:59:50,234 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-02-28 19:59:50,235 - aiogram.event - INFO - Update id=619473255 is handled. Duration 125 ms by bot id=7690334241
+2025-02-28 19:59:51,602 - __main__ - INFO - Close chat button clicked by user_id: 310259261
+2025-02-28 19:59:51,767 - __main__ - INFO - State cleared successfully
+2025-02-28 19:59:51,921 - __main__ - INFO - Sent farewell message: 'Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!'
+2025-02-28 19:59:51,921 - __main__ - INFO - Chat closed for user_id: 310259261
+2025-02-28 19:59:51,922 - aiogram.event - INFO - Update id=619473256 is handled. Duration 328 ms by bot id=7690334241
+2025-02-28 20:01:04,128 - __main__ - INFO - Restarted conversation for user_id: 310259261
+2025-02-28 20:01:04,129 - aiogram.event - INFO - Update id=619473257 is handled. Duration 234 ms by bot id=7690334241
+2025-02-28 20:01:05,335 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-02-28 20:01:05,335 - aiogram.event - INFO - Update id=619473258 is handled. Duration 78 ms by bot id=7690334241
+2025-02-28 20:01:07,341 - __main__ - INFO - Selected service: Pedicure for user_id: 310259261
+2025-02-28 20:01:07,342 - aiogram.event - INFO - Update id=619473259 is handled. Duration 171 ms by bot id=7690334241
+2025-02-28 20:01:08,289 - __main__ - INFO - Selected sub-option: Classical for user_id: 310259261
+2025-02-28 20:01:08,290 - aiogram.event - INFO - Update id=619473260 is handled. Duration 156 ms by bot id=7690334241
+2025-02-28 20:01:09,396 - __main__ - INFO - Close chat button clicked by user_id: 310259261
+2025-02-28 20:01:09,504 - __main__ - INFO - State cleared successfully
+2025-02-28 20:01:09,599 - __main__ - INFO - Sent farewell message: 'Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!'
+2025-02-28 20:01:09,599 - __main__ - INFO - Chat closed for user_id: 310259261
+2025-02-28 20:01:09,599 - aiogram.event - INFO - Update id=619473261 is handled. Duration 203 ms by bot id=7690334241
+2025-02-28 20:01:19,743 - __main__ - INFO - Restarted conversation for user_id: 310259261
+2025-02-28 20:01:19,743 - aiogram.event - INFO - Update id=619473262 is handled. Duration 94 ms by bot id=7690334241
+2025-02-28 20:01:21,436 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-02-28 20:01:21,437 - aiogram.event - INFO - Update id=619473263 is handled. Duration 94 ms by bot id=7690334241
+2025-02-28 20:01:23,358 - __main__ - INFO - Selected service: Keratin for user_id: 310259261
+2025-02-28 20:01:23,358 - aiogram.event - INFO - Update id=619473264 is handled. Duration 188 ms by bot id=7690334241
+2025-02-28 20:01:25,815 - __main__ - INFO - Close chat button clicked by user_id: 310259261
+2025-02-28 20:01:26,080 - __main__ - INFO - State cleared successfully
+2025-02-28 20:01:26,359 - __main__ - INFO - Sent farewell message: 'Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!'
+2025-02-28 20:01:26,359 - __main__ - INFO - Chat closed for user_id: 310259261
+2025-02-28 20:01:26,360 - aiogram.event - INFO - Update id=619473265 is handled. Duration 546 ms by bot id=7690334241
+2025-02-28 21:58:33,431 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-02-28 21:58:33,431 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-02-28 21:58:34,492 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-02-28 21:58:34,494 - aiogram.dispatcher - WARNING - Sleep for 1.278739 seconds and try again... (tryings = 1, bot id = 7690334241)
+2025-02-28 21:58:35,786 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-02-28 21:58:35,787 - aiogram.dispatcher - WARNING - Sleep for 1.743494 seconds and try again... (tryings = 2, bot id = 7690334241)
+2025-02-28 21:58:37,544 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-02-28 21:58:37,546 - aiogram.dispatcher - WARNING - Sleep for 2.399947 seconds and try again... (tryings = 3, bot id = 7690334241)
+2025-02-28 21:58:51,957 - aiogram.dispatcher - INFO - Connection established (tryings = 4, bot id = 7690334241)
+2025-03-01 02:36:02,918 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-01 02:36:02,929 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-01 02:36:18,433 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7690334241)
+2025-03-02 02:08:48,125 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-02 02:08:48,132 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-02 02:08:49,413 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:08:49,414 - aiogram.dispatcher - WARNING - Sleep for 1.309857 seconds and try again... (tryings = 1, bot id = 7690334241)
+2025-03-02 02:08:50,947 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:08:50,948 - aiogram.dispatcher - WARNING - Sleep for 1.782290 seconds and try again... (tryings = 2, bot id = 7690334241)
+2025-03-02 02:08:53,018 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:08:53,020 - aiogram.dispatcher - WARNING - Sleep for 2.170779 seconds and try again... (tryings = 3, bot id = 7690334241)
+2025-03-02 02:08:55,606 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:08:55,607 - aiogram.dispatcher - WARNING - Sleep for 3.040229 seconds and try again... (tryings = 4, bot id = 7690334241)
+2025-03-02 02:08:58,941 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:08:58,942 - aiogram.dispatcher - WARNING - Sleep for 3.875071 seconds and try again... (tryings = 5, bot id = 7690334241)
+2025-03-02 02:09:02,922 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:02,923 - aiogram.dispatcher - WARNING - Sleep for 4.954713 seconds and try again... (tryings = 6, bot id = 7690334241)
+2025-03-02 02:09:08,032 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:08,033 - aiogram.dispatcher - WARNING - Sleep for 5.018457 seconds and try again... (tryings = 7, bot id = 7690334241)
+2025-03-02 02:09:13,172 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:13,173 - aiogram.dispatcher - WARNING - Sleep for 5.058465 seconds and try again... (tryings = 8, bot id = 7690334241)
+2025-03-02 02:09:18,350 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:18,351 - aiogram.dispatcher - WARNING - Sleep for 4.978487 seconds and try again... (tryings = 9, bot id = 7690334241)
+2025-03-02 02:09:23,455 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:23,456 - aiogram.dispatcher - WARNING - Sleep for 4.900271 seconds and try again... (tryings = 10, bot id = 7690334241)
+2025-03-02 02:09:28,463 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:28,464 - aiogram.dispatcher - WARNING - Sleep for 5.079472 seconds and try again... (tryings = 11, bot id = 7690334241)
+2025-03-02 02:09:33,663 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:33,664 - aiogram.dispatcher - WARNING - Sleep for 5.031460 seconds and try again... (tryings = 12, bot id = 7690334241)
+2025-03-02 02:09:38,820 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:38,821 - aiogram.dispatcher - WARNING - Sleep for 5.033894 seconds and try again... (tryings = 13, bot id = 7690334241)
+2025-03-02 02:09:43,982 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:43,983 - aiogram.dispatcher - WARNING - Sleep for 5.108365 seconds and try again... (tryings = 14, bot id = 7690334241)
+2025-03-02 02:09:49,220 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:49,221 - aiogram.dispatcher - WARNING - Sleep for 4.679611 seconds and try again... (tryings = 15, bot id = 7690334241)
+2025-03-02 02:09:54,018 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:54,019 - aiogram.dispatcher - WARNING - Sleep for 4.911583 seconds and try again... (tryings = 16, bot id = 7690334241)
+2025-03-02 02:09:59,045 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:09:59,046 - aiogram.dispatcher - WARNING - Sleep for 4.975960 seconds and try again... (tryings = 17, bot id = 7690334241)
+2025-03-02 02:10:04,130 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:04,131 - aiogram.dispatcher - WARNING - Sleep for 4.946668 seconds and try again... (tryings = 18, bot id = 7690334241)
+2025-03-02 02:10:09,247 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:09,248 - aiogram.dispatcher - WARNING - Sleep for 5.076381 seconds and try again... (tryings = 19, bot id = 7690334241)
+2025-03-02 02:10:14,464 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:14,465 - aiogram.dispatcher - WARNING - Sleep for 4.939755 seconds and try again... (tryings = 20, bot id = 7690334241)
+2025-03-02 02:10:19,522 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:19,522 - aiogram.dispatcher - WARNING - Sleep for 5.160865 seconds and try again... (tryings = 21, bot id = 7690334241)
+2025-03-02 02:10:24,798 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:24,799 - aiogram.dispatcher - WARNING - Sleep for 5.072128 seconds and try again... (tryings = 22, bot id = 7690334241)
+2025-03-02 02:10:29,984 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:29,986 - aiogram.dispatcher - WARNING - Sleep for 5.235925 seconds and try again... (tryings = 23, bot id = 7690334241)
+2025-03-02 02:10:35,458 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:35,460 - aiogram.dispatcher - WARNING - Sleep for 4.943165 seconds and try again... (tryings = 24, bot id = 7690334241)
+2025-03-02 02:10:40,641 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:40,642 - aiogram.dispatcher - WARNING - Sleep for 5.082269 seconds and try again... (tryings = 25, bot id = 7690334241)
+2025-03-02 02:10:45,925 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:45,926 - aiogram.dispatcher - WARNING - Sleep for 5.066136 seconds and try again... (tryings = 26, bot id = 7690334241)
+2025-03-02 02:10:51,127 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:51,128 - aiogram.dispatcher - WARNING - Sleep for 4.905034 seconds and try again... (tryings = 27, bot id = 7690334241)
+2025-03-02 02:10:56,158 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443 ssl:True [SSLCertVerificationError: (1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'api.telegram.org'. (_ssl.c:1000)")]
+2025-03-02 02:10:56,171 - aiogram.dispatcher - WARNING - Sleep for 5.084990 seconds and try again... (tryings = 28, bot id = 7690334241)
+2025-03-02 02:11:11,528 - aiogram.dispatcher - INFO - Connection established (tryings = 29, bot id = 7690334241)
+2025-03-02 06:29:20,562 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-02 06:29:20,562 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-02 06:29:21,568 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 06:29:21,568 - aiogram.dispatcher - WARNING - Sleep for 1.252601 seconds and try again... (tryings = 1, bot id = 7690334241)
+2025-03-02 06:29:22,828 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 06:29:22,828 - aiogram.dispatcher - WARNING - Sleep for 1.418027 seconds and try again... (tryings = 2, bot id = 7690334241)
+2025-03-02 14:09:29,269 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 14:09:29,270 - aiogram.dispatcher - WARNING - Sleep for 1.963161 seconds and try again... (tryings = 3, bot id = 7690334241)
+2025-03-02 14:09:31,246 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 14:09:31,248 - aiogram.dispatcher - WARNING - Sleep for 2.465184 seconds and try again... (tryings = 4, bot id = 7690334241)
+2025-03-02 14:09:33,729 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 14:09:33,730 - aiogram.dispatcher - WARNING - Sleep for 3.317835 seconds and try again... (tryings = 5, bot id = 7690334241)
+2025-03-02 14:09:37,053 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorDNSError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+2025-03-02 14:09:37,054 - aiogram.dispatcher - WARNING - Sleep for 4.271718 seconds and try again... (tryings = 6, bot id = 7690334241)
+2025-03-02 14:09:51,672 - aiogram.dispatcher - INFO - Connection established (tryings = 7, bot id = 7690334241)
+2025-03-02 19:42:25,601 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-02 19:42:25,614 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-02 19:42:37,062 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7690334241)
+2025-03-02 21:31:29,623 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-02 21:31:29,624 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-02 21:31:30,645 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Сетевая папка недоступна. За информацией о разрешении проблем в сети обратитесь к справочной системе Windows]
+2025-03-02 21:31:30,653 - aiogram.dispatcher - WARNING - Sleep for 1.478213 seconds and try again... (tryings = 1, bot id = 7690334241)
+2025-03-02 21:31:32,144 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Сетевая папка недоступна. За информацией о разрешении проблем в сети обратитесь к справочной системе Windows]
+2025-03-02 21:31:32,147 - aiogram.dispatcher - WARNING - Sleep for 1.773756 seconds and try again... (tryings = 2, bot id = 7690334241)
+2025-03-02 21:31:45,530 - aiogram.dispatcher - INFO - Connection established (tryings = 3, bot id = 7690334241)
+2025-03-02 22:35:43,064 - __main__ - INFO - Received /start command from user_id: 310259261
+2025-03-02 22:35:43,302 - __main__ - INFO - Successfully sent welcome message to user_id: 310259261
+2025-03-02 22:35:43,303 - aiogram.event - INFO - Update id=619473266 is handled. Duration 250 ms by bot id=7690334241
+2025-03-02 22:35:46,692 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-03-02 22:35:46,692 - aiogram.event - INFO - Update id=619473267 is handled. Duration 93 ms by bot id=7690334241
+2025-03-02 22:35:48,344 - __main__ - INFO - Selected service: Hair coloring for user_id: 310259261
+2025-03-02 22:35:48,344 - aiogram.event - INFO - Update id=619473268 is handled. Duration 375 ms by bot id=7690334241
+2025-03-02 22:35:49,478 - __main__ - INFO - Close chat button clicked by user_id: 310259261
+2025-03-02 22:35:49,581 - __main__ - INFO - State cleared successfully
+2025-03-02 22:35:49,660 - __main__ - INFO - Sent farewell message: 'Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!'
+2025-03-02 22:35:49,661 - __main__ - INFO - Chat closed for user_id: 310259261
+2025-03-02 22:35:49,661 - aiogram.event - INFO - Update id=619473269 is handled. Duration 187 ms by bot id=7690334241
+2025-03-02 22:35:53,523 - __main__ - INFO - Restarted conversation for user_id: 310259261
+2025-03-02 22:35:53,523 - aiogram.event - INFO - Update id=619473270 is handled. Duration 421 ms by bot id=7690334241
+2025-03-02 22:35:54,786 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-03-02 22:35:54,786 - aiogram.event - INFO - Update id=619473271 is handled. Duration 312 ms by bot id=7690334241
+2025-03-02 22:35:56,830 - __main__ - INFO - Selected service: Keratin for user_id: 310259261
+2025-03-02 22:35:56,831 - aiogram.event - INFO - Update id=619473272 is handled. Duration 155 ms by bot id=7690334241
+2025-03-02 22:35:57,698 - __main__ - INFO - Selected sub-option: Up to 30 cm for user_id: 310259261
+2025-03-02 22:35:57,698 - aiogram.event - INFO - Update id=619473273 is handled. Duration 155 ms by bot id=7690334241
+2025-03-02 22:35:59,044 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-03-02 22:35:59,045 - aiogram.event - INFO - Update id=619473274 is handled. Duration 172 ms by bot id=7690334241
+2025-03-02 22:36:01,777 - __main__ - INFO - Selected service: Manicure for user_id: 310259261
+2025-03-02 22:36:01,778 - aiogram.event - INFO - Update id=619473275 is handled. Duration 171 ms by bot id=7690334241
+2025-03-02 22:36:03,250 - __main__ - INFO - Selected sub-option: Hardware for user_id: 310259261
+2025-03-02 22:36:03,250 - aiogram.event - INFO - Update id=619473276 is handled. Duration 280 ms by bot id=7690334241
+2025-03-02 22:36:04,195 - __main__ - INFO - Selected additional option: permanent for user_id: 310259261
+2025-03-02 22:36:04,195 - aiogram.event - INFO - Update id=619473277 is handled. Duration 265 ms by bot id=7690334241
+2025-03-02 22:36:06,854 - __main__ - INFO - Received name: Hurry from user_id: 310259261
+2025-03-02 22:36:06,854 - aiogram.event - INFO - Update id=619473278 is handled. Duration 94 ms by bot id=7690334241
+2025-03-02 22:36:11,615 - __main__ - INFO - Received phone: 👋 Close chat from user_id: 310259261
+2025-03-02 22:36:11,616 - aiogram.event - INFO - Update id=619473279 is handled. Duration 94 ms by bot id=7690334241
+2025-03-02 22:36:20,754 - __main__ - INFO - Received email: mishakovaanastasiya@gmail.com from user_id: 310259261
+2025-03-02 22:36:20,754 - aiogram.event - INFO - Update id=619473280 is handled. Duration 187 ms by bot id=7690334241
+2025-03-02 22:36:22,502 - __main__ - INFO - Selected month: 2025-03 for user_id: 310259261
+2025-03-02 22:36:22,503 - aiogram.event - INFO - Update id=619473281 is handled. Duration 327 ms by bot id=7690334241
+2025-03-02 22:36:23,719 - __main__ - INFO - Selected date: 2025-03-05 for user_id: 310259261
+2025-03-02 22:36:23,719 - aiogram.event - INFO - Update id=619473282 is handled. Duration 203 ms by bot id=7690334241
+2025-03-02 22:36:25,062 - __main__ - INFO - Selected time: 10:00 for user_id: 310259261
+2025-03-02 22:36:25,063 - aiogram.event - INFO - Update id=619473283 is handled. Duration 327 ms by bot id=7690334241
+2025-03-02 22:36:26,702 - __main__ - INFO - Added booking for Hurry on 2025-03-05 at 10:00
+2025-03-02 22:36:29,004 - __main__ - INFO - Confirmation email sent to mishakovaanastasiya@gmail.com
+2025-03-02 22:36:29,450 - __main__ - INFO - Booking confirmed for user_id: 310259261
+2025-03-02 22:36:29,451 - aiogram.event - INFO - Update id=619473284 is handled. Duration 2765 ms by bot id=7690334241
+2025-03-02 23:21:24,519 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-03-02 23:21:24,519 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7690334241)
+2025-03-02 23:21:35,730 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7690334241)
+2025-03-03 00:02:13,972 - __main__ - INFO - Asked for service from user_id: 310259261
+2025-03-03 00:02:13,974 - aiogram.event - INFO - Update id=619473285 is handled. Duration 469 ms by bot id=7690334241
+2025-03-03 00:02:15,959 - aiogram.event - INFO - Update id=619473286 is handled. Duration 250 ms by bot id=7690334241
+2025-03-03 00:02:19,429 - __main__ - INFO - Received name: Шенген from user_id: 310259261
+2025-03-03 00:02:19,430 - aiogram.event - INFO - Update id=619473287 is handled. Duration 281 ms by bot id=7690334241
+2025-03-03 00:02:21,249 - __main__ - INFO - Received phone: После from user_id: 310259261
+2025-03-03 00:02:21,250 - aiogram.event - INFO - Update id=619473288 is handled. Duration 139 ms by bot id=7690334241
+2025-03-03 00:02:23,549 - __main__ - INFO - Received email: Наше from user_id: 310259261
+2025-03-03 00:02:23,550 - aiogram.event - INFO - Update id=619473289 is handled. Duration 234 ms by bot id=7690334241
+2025-03-03 00:02:26,858 - __main__ - INFO - Selected month: 2025-03 for user_id: 310259261
+2025-03-03 00:02:26,858 - aiogram.event - INFO - Update id=619473290 is handled. Duration 1266 ms by bot id=7690334241
+2025-03-03 00:02:28,303 - aiogram.event - INFO - Update id=619473291 is handled. Duration 219 ms by bot id=7690334241
+2025-03-03 00:02:31,158 - __main__ - INFO - Close chat button clicked by user_id: 310259261
+2025-03-03 00:02:31,319 - __main__ - INFO - State cleared successfully
+2025-03-03 00:02:31,321 - __main__ - INFO - User has appointments: False, count: 0
+2025-03-03 00:02:31,394 - __main__ - INFO - Sent farewell message: 'Thank you for your interest in Romashka Beauty Salon! We hope to see you soon. Have a great day!'
+2025-03-03 00:02:31,396 - __main__ - INFO - Chat closed for user_id: 310259261
+2025-03-03 00:02:31,396 - aiogram.event - INFO - Update id=619473292 is handled. Duration 233 ms by bot id=7690334241
+2025-03-03 00:47:00,437 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-03 00:47:00,714 - aiogram.dispatcher - INFO - Polling stopped for bot @RomashkaBCNbot id=7690334241 - 'Salon Romashka'

@@ -403,10 +403,12 @@ def send_email(recipient, name, service, sub_option, additional_option, date_str
         Date: {date_str}
         Time: {time_str}
         
-        We look forward to seeing you!
+        We look forward to seeing you soon!
         
         Best regards,
         Beauty Salon Romashka
+        Address: Carrer Corsega, 409, 08001, Barcelona, Spain
+        Phone number: +34 111 222 333
         """
         
         msg.attach(MIMEText(body, 'plain'))
@@ -1040,3 +1042,13 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+# Errors ClientConnectorCertificateError: Cannot connect to host api.telegram.org:443
+
+# Microsoft Windows [Version 10.0.22631.4890]
+# (c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+# C:\Users\Anastasiia>certutil -generateSSTFromWU roots.sst
+# SST-файл обновлен.
+# CertUtil: -generateSSTFromWU — команда успешно выполнена.
