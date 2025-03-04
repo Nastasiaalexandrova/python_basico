@@ -293,6 +293,10 @@ import sqlite3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+<<<<<<< HEAD:Chat_bot/bot.py
+from datetime import datetime
+=======
+>>>>>>> c8b012724188e293bfb16742a89d803de366771e:Chat_bot/bot1.py
 # from aiogram.dispatcher import FSMContext
 # from aiogram.utils import executor #added
 
@@ -352,6 +356,15 @@ def init_db():
     conn.close()
     logger.info("Database initialized")
 
+################################### class 04/03
+def is_valid_booking(date_str, time_str):
+    # Combine date and time to create a full datetime object
+    selected_datetime = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+    now = datetime.now()
+
+    # Check if the selected datetime is in the future
+    return selected_datetime > now
+
 # Get available time slots for a specific date
 def get_available_slots(date_str):
     conn = sqlite3.connect("salon_bookings.db")
@@ -366,10 +379,27 @@ def get_available_slots(date_str):
     all_slots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"]
     available_slots = [slot for slot in all_slots if slot not in booked_times]
     
-    return available_slots
+
+    #############################class2403
+    # Now filter out past slots for the selected date
+    # Only keep future slots
+    future_slots = [slot for slot in available_slots if is_valid_booking(date_str, slot)]
+    
+    return future_slots
+    #####################
+    # return available_slots
 
 # Add a booking to the database
 def add_booking(name, phone, email, service, sub_option, additional_option, date_str, time_str):
+    
+    ##############################classs0403
+    # First, check if the selected time is in the future
+    if not is_valid_booking(date_str, time_str):
+        logger.error(f"User tried to book a past slot: {time_str} on {date_str}")
+        return False  # Do not proceed with the booking if the time is in the past
+    ##################
+    
+    
     conn = sqlite3.connect("salon_bookings.db")
     cursor = conn.cursor()
     
@@ -978,6 +1008,16 @@ async def close_chat(message: types.Message, state: FSMContext):
 @dp.message(lambda msg: msg.text == "📅 Start new appointment")
 async def restart_appointment(message: types.Message):
     try:
+<<<<<<< HEAD:Chat_bot/bot.py
+        ######################class 0403
+        logger.info(f"Received /start command from user_id: {message.from_user.id}")
+        # Get the username of the user
+        user = message.from_user
+        # username = user.username if user.username else user.first_name
+        first_name = user.first_name if user.first_name else user.username
+        #########
+=======
+>>>>>>> c8b012724188e293bfb16742a89d803de366771e:Chat_bot/bot1.py
         keyboard = ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text="📅 Make an appointment")],
@@ -986,15 +1026,23 @@ async def restart_appointment(message: types.Message):
             resize_keyboard=True
         )
         await message.answer(
+<<<<<<< HEAD:Chat_bot/bot.py
+            f"Welcome back to Romashka Beauty Salon, {first_name.capitalize()}! What would you like to do?", 
+=======
             "Welcome back to Romashka Beauty Salon! What would you like to do?", 
+>>>>>>> c8b012724188e293bfb16742a89d803de366771e:Chat_bot/bot1.py
             reply_markup=keyboard
         )
         logger.info(f"Restarted conversation for user_id: {message.from_user.id}")
     except Exception as e:
         logger.error(f"Error in restart_appointment: {e}", exc_info=True)
+<<<<<<< HEAD:Chat_bot/bot.py
+        #################################
+=======
 
 
 
+>>>>>>> c8b012724188e293bfb16742a89d803de366771e:Chat_bot/bot1.py
 
 
 # General message handler to catch all messages
@@ -1051,4 +1099,8 @@ if __name__ == "__main__":
 
 # C:\Users\Anastasiia>certutil -generateSSTFromWU roots.sst
 # SST-файл обновлен.
+<<<<<<< HEAD:Chat_bot/bot.py
 # CertUtil: -generateSSTFromWU — команда успешно выполнена.
+=======
+# CertUtil: -generateSSTFromWU — команда успешно выполнена.
+>>>>>>> c8b012724188e293bfb16742a89d803de366771e:Chat_bot/bot1.py
